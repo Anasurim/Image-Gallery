@@ -4,6 +4,7 @@ import axios from 'axios';
 export default class PixabayApiService {
   constructor() {
     this.searchQuery = '';
+    this.page = 1;
   }
 
   async fetchImages() {
@@ -13,15 +14,26 @@ export default class PixabayApiService {
       image_type: 'photo',
       orientation: 'horizontal',
       safesearch: true,
+      page: this.page,
+      per_page: 40,
     });
     const BASE_URL = `https://pixabay.com/api/?key=${API_KEY}&${searchParams}`;
 
     try {
       const response = await axios.get(BASE_URL);
       console.log(response.data);
+      this.incrementPage();
     } catch (error) {
       console.error(error);
     }
+  }
+
+  incrementPage() {
+    return (this.page += 1);
+  }
+
+  resetPage() {
+    return (this.page = 1);
   }
 
   get query() {

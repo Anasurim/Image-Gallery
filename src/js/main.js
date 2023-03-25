@@ -8,10 +8,17 @@ const refs = {
 
 const pixApiService = new PixabayApiService();
 
-refs.form.addEventListener('submit', e => {
+refs.form.addEventListener('submit', onSearch);
+refs.loadBtn.addEventListener('click', onClick);
+
+function onSearch(e) {
   e.preventDefault();
 
   pixApiService.query = e.currentTarget.elements.searchQuery.value;
-
+  pixApiService.resetPage();
   pixApiService.fetchImages();
-});
+}
+
+function onClick() {
+  pixApiService.fetchImages();
+}
