@@ -6,12 +6,12 @@ const refs = {
   loadBtn: document.querySelector('.load-more'),
 };
 
-let searchQuery = '';
 const pixApiService = new PixabayApiService();
 
 refs.form.addEventListener('submit', e => {
   e.preventDefault();
-  searchQuery = e.currentTarget.elements.searchQuery.value;
 
-  pixApiService.fetchImages(searchQuery);
+  pixApiService.query = e.currentTarget.elements.searchQuery.value;
+
+  pixApiService.fetchImages();
 });
