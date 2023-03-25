@@ -1,10 +1,16 @@
 import PixabayApiService from './fetchImg';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const refs = {
   form: document.querySelector('.search-form'),
   gallery: document.querySelector('.gallery'),
   loadBtn: document.querySelector('.load-more'),
 };
+
+const lightbox = new SimpleLightbox('.photo-card a', {
+  captions: true,
+});
 
 const pixApiService = new PixabayApiService();
 
@@ -63,4 +69,6 @@ function appendCardMarkup(hits) {
   );
 
   refs.gallery.insertAdjacentHTML('beforeend', markUp.join(''));
+
+  lightbox.refresh();
 }
