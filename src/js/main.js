@@ -16,9 +16,46 @@ function onSearch(e) {
 
   pixApiService.query = e.currentTarget.elements.searchQuery.value;
   pixApiService.resetPage();
-  pixApiService.fetchImages();
+  pixApiService.fetchImages().then(appendCardMarkup);
 }
 
 function onClick() {
-  pixApiService.fetchImages();
+  pixApiService.fetchImages().then(appendCardMarkup);
+}
+
+function appendCardMarkup(hits) {
+  const markUp = hits.map(
+    ({
+      webformatURL,
+      largeImageURL,
+      tags,
+      likes,
+      views,
+      comments,
+      downloads,
+    }) => `
+        <div class="photo-card">
+            <a href="${largeImageURL}"><img src="${webformatURL}" alt="${tags}" loading="lazy" /></a>
+            <div class="info">
+                <p class="info-item">
+                    <b>Likes</b>
+                    ${likes}
+                </p>
+                <p class="info-item">
+                    <b>Views</b>
+                    ${views}
+                </p>
+                <p class="info-item">
+                    <b>Comments</b>
+                    ${comments}
+                </p>
+                <p class="info-item">
+                    <b>Downloads</b>
+                    ${downloads}
+                </p>
+            </div>
+        </div>`
+  );
+
+  refs.gallery.insertAdjacentHTML('beforeend', markUp.join(''));
 }
