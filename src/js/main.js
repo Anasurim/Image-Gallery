@@ -14,6 +14,7 @@ refs.loadBtn.addEventListener('click', onClick);
 function onSearch(e) {
   e.preventDefault();
 
+  clearGallery();
   pixApiService.query = e.currentTarget.elements.searchQuery.value;
   pixApiService.resetPage();
   pixApiService.fetchImages().then(appendCardMarkup);
@@ -21,6 +22,10 @@ function onSearch(e) {
 
 function onClick() {
   pixApiService.fetchImages().then(appendCardMarkup);
+}
+
+function clearGallery() {
+  refs.gallery.innerHTML = '';
 }
 
 function appendCardMarkup(hits) {
