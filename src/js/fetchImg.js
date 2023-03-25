@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 // Your API key: 34723681-f0b96f726e7635a8a0d729f9b
 
 export default class PixabayApiService {
@@ -24,7 +25,7 @@ export default class PixabayApiService {
       console.log(response.data);
 
       this.incrementPage();
-      return response.data.hits;
+      return response.data;
     } catch (error) {
       console.error(error);
     }

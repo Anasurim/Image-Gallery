@@ -75,3 +75,7 @@
   font-size: 14px;
   color: #333;
 }
+
+.load-more.is-hidden {
+  display: none;
+}
