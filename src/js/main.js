@@ -22,7 +22,7 @@ refs.loadBtn.addEventListener('click', onClick);
 function onSearch(e) {
   e.preventDefault();
 
-  pixApiService.query = e.currentTarget.elements.searchQuery.value;
+  pixApiService.query = e.currentTarget.elements.searchQuery.value.trim();
 
   if (pixApiService.query === '') {
     return Notify.failure('Write something!');
@@ -41,6 +41,8 @@ function onSearch(e) {
       Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
       );
+      refs.loadBtn.classList.add('is-hidden');
+
       return [];
     }
 
