@@ -64,6 +64,11 @@ async function onClick() {
     const hits = await pixApiService.fetchImages();
 
     appendCardMarkup(hits);
+
+    if (hits.hits.length < 40) {
+      hideLoadBtn();
+      Notify.info("We're sorry, but you've reached the end of search results.");
+    }
   } catch (error) {
     console.log('Error:', error);
   }
